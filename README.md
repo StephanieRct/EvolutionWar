@@ -1,10 +1,12 @@
 EvolutionWar
 ============
-Genetic Algorithm involving AIs fighting each other to the death... or not?<br>
-By Stephanie Rancourt   @StephanieRct<br>
-Original version date: somewhen around 2009 and 2010<br>
+This is a simple project I made a long time ago just for fun. There are 2 AIs that control each a character in 2D space. 
+Each AI have a list of action to do each round. They do what they can with the number of Action Points they have each round.
+When one AI dies, the winner get cloned and mutated into another AI with which he will fight against and the process continue on and on.<br>
+
+
 instruction:<br>
-1-run<br>
+1-build/run<br>
 2-hit Pause (on your keyboard) to see current winner ai code*<br>
 3-Eat cake<br>
 *Result may change from one run to another.<br>
