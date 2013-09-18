@@ -10,4 +10,4 @@ instruction:<br>
 *Result may change from one run to another.<br>
 Use, Copy, Modify, or do whatever you want want with this code. I'm not responsible for anything you do 
 with this and it's not my fault if you die by to much cake eating. :)<br>
-Also don't mind the ugly code, cheers!<br>
+Also don't mind the ugly code, cheers! <3<br>
