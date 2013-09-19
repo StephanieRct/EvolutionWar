@@ -1,4 +1,4 @@
-// EvolutionWar.cpp : Genetic Algo involving 2 AIs fighting to the death... or not?
+// EvoWar.cpp : Genetic Algo involving 2 AIs fighting to the death... or not?
 // By Stephanie Rancourt   @StephanieRct
 // Original version date: somewhen around 2009 and 2010
 // instruction:
@@ -9,11 +9,12 @@
 // Use, Copy, Modify, or do whatever you want want with this code. I'm not responsible for anything you do with this and it's not my fault if you die by to much cake eating. :)
 // Also don't mind the ugly code, cheers!
 
-#include <cctype>
-#include <map>
-#include <stack>
 #include <vector>
-#include <Windows.h>
+#include <time.h>
+
+#if defined(WIN32) && defined(_CONSOLE)
+#   include <windows.h>
+#endif
 
 #define nullptr 0
 typedef unsigned int uint32;
@@ -394,9 +395,24 @@ Ai * NewMutatedAi(Ai* apAi)
     }
     return pAi;
 }
-int _tmain(int argc, _TCHAR* argv[])
+void setScoreDisplay(uint32 aScore0, uint32 aScore1, uint32 aScoreNull){
+
+#if defined(WIN32) && defined(_CONSOLE)
+    HWND consoleWindow = GetConsoleWindow();
+    char buff[256];
+    sprintf_s(buff,256,"Score: 0: %8d    1: %8d   Null: %8d", aScore0, aScore1, aScoreNull);
+    ::SetWindowTextA(consoleWindow , buff);
+#else
+    printf("== Score: 0: %8d    1: %8d   Null: %8d ==\n", aScore0, aScore1, aScoreNull);
+#endif
+}
+
+int main(int argc, char* argv[])
 {
-    uint32 uiSeed = ::GetTickCount();
+    time_t tTime;
+    time(&tTime);
+    
+    uint32 uiSeed = tTime;//::GetTickCount();
     srand(uiSeed);
     uint32 uiNbGeneration=0;
     uint32 uiLastWinner = -1;
@@ -430,7 +446,6 @@ int _tmain(int argc, _TCHAR* argv[])
     uint32 uiScore0=0;
     uint32 uiScore1=0;
     uint32 uiScoreNull=0;
-    HWND consoleWindow = GetConsoleWindow();
     while(1)
     {
         printf("===== Generation %d ===== \n", uiNbGeneration);
@@ -520,9 +535,7 @@ int _tmain(int argc, _TCHAR* argv[])
                 }
             }
         }
-        char buff[256];
-        sprintf_s(buff,256,"Score: 0: %8d    1: %8d   Null: %8d", uiScore0, uiScore1, uiScoreNull);
-        ::SetWindowTextA(consoleWindow , buff);
+        setScoreDisplay(uiScore0, uiScore1, uiScoreNull);
 
         ctx0.mpAiCharacter = &ch0;
         ctx0.mpCurrentTarget = 0;
